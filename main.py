@@ -54,10 +54,15 @@ def getname(count, ext, path):
 def getpath():
     try:
         path = input(str("Provide the path where you stored your photos: "))
+        if path[-1] == "\\":
+            pass
+        elif path[-1] != "\\":
+            path = path + "\\"
+
         if os.path.isdir(path):
-            print("Path provided: ",path)
+            print(f"Path provided: {path}")
         else:
-            print("'", path, "' is not a valid path. The default path used is where this script is located.")
+            print(f" '{path}' is not a valid path. The default path used is where this script is located.")
             path = os.path.abspath(os.path.dirname(__file__)) + "\\" #takes the directory where the script is located
     except:
         print("Ni dobro:", sys.exc_info()[0], "occurred.")
