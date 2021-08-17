@@ -59,13 +59,14 @@ def getpath():
         elif path[-1] != "\\":
             path = path + "\\"
 
-        if os.path.isdir(path):
-            print(f"Path provided: {path}")
-        else:
-            print(f" '{path}' is not a valid path. The default path used is where this script is located.")
-            path = os.path.abspath(os.path.dirname(__file__)) + "\\" #takes the directory where the script is located
     except:
         print("Ni dobro:", sys.exc_info()[0], "occurred.")
+
+    if os.path.isdir(path):
+        print(f"Path provided: {path}")
+    else:
+        print(f" '{path}' is not a valid path. The default path used is where this script is located.")
+        path = os.path.abspath(os.path.dirname(__file__)) + "\\"  # takes the directory where the script is located
     return path
 
 def getext():
