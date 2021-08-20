@@ -16,6 +16,7 @@ The compatible file extensions currently are:
 - .jfif
 - .jfi
 - .tiff
+- .tif
 - .riff
 
 ## How to run
