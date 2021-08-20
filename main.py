@@ -20,7 +20,7 @@ def main():
         name = getname(counter, ext, path)
         worksheetname = name  #the name must not exceed the 31 chars
         im = Image.open(element)
-        im_exif = im.getexif()
+        im_exif = getexifmethod(ext, im)
         counter += 1
 
         try:
@@ -54,6 +54,13 @@ def getname(count, ext, path):
     else:
         n = n0
     return n
+
+def getexifmethod(ext, im): #temporary workaround
+    if ext == ".tif" or ext == ".tiff":
+        im_exif = im.getexif()
+    else:
+        im_exif = im._getexif()
+    return im_exif
 
 def getpath():
     try:
