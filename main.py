@@ -11,12 +11,16 @@ def main():
     ext = getext()
     path = getpath()
     filelist = glob.glob(path + "*" + ext)
-    writer = pd.ExcelWriter('export.xlsx', engine='xlsxwriter')
+    try:
+        writer = pd.ExcelWriter('export.xlsx', engine='xlsxwriter')
+    except PermissionError:
+        print("Please close export.xlsx and try again.\nExiting..")
+        sys.exit()
     for element in filelist:
         name = getname(counter, ext, path)
         worksheetname = name  #the name must not exceed the 31 chars
         im = Image.open(element)
-        im_exif = im._getexif()
+        im_exif = im.getexif()
         counter += 1
 
         try:
@@ -70,7 +74,7 @@ def getpath():
     return path
 
 def getext():
-    extensions = [".jpg", ".jpeg", ".jpe", ".jif", ".jfif", ".jfi", ".tiff", ".riff", "jpg", "jpeg", "jpe", "jif", "jfif", "jfi", "tiff", "riff"] #compatible extensions, it's not elegant but it works
+    extensions = [".jpg", ".jpeg", ".jpe", ".jif", ".jfif", ".jfi", ".tif", ".tiff", ".riff", "jpg", "jpeg", "jpe", "jif", "jfif", "jfi", "tif", "tiff", "riff"] #compatible extensions, it's not elegant but it works
     ext = input("Provide the file extension of the photos ")
     if ext in extensions:
         if ext[0] == ".":
