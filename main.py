@@ -30,14 +30,16 @@ def main():
                 for key, val in im_exif.items():
                     if key in ExifTags.TAGS:
                         exif_dict[ExifTags.TAGS[key]] = val
+            try:
                 for key, val in exif_dict['GPSInfo'].items():
                     if key in ExifTags.GPSTAGS:
                         gps_info[ExifTags.GPSTAGS[key]] = val
                 exif_dict.update(gps_info)
                 exif_dict.pop("GPSInfo") #delete double GPSInfo tag
 
-        except KeyError:
-            print("Some exif tags might have been not found.")
+            except KeyError:
+                print("GPS info not found")
+                pass # crack on if the GPS info is not found
 
         except:
             print("Ni dobro:", sys.exc_info()[0], "occurred.")
