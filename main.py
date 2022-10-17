@@ -45,7 +45,7 @@ def main():
             print("Ni dobro:", sys.exc_info()[0], "occurred.")
         df = pd.DataFrame(list(exif_dict.items()), columns=['Tags', 'Values'])
         df.to_excel(writer, index=False, sheet_name=worksheetname)
-    writer.save()
+    writer.close()
     print("Exif tags exported successfully.")
 
 def getname(count, ext, path):
